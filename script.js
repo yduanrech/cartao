@@ -25,6 +25,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
         updateFormState();
     });
 
+    // Formata o CVC para três dígitos
+    cvcInput.addEventListener('input', (event) => {
+        let value = event.target.value.replace(/\D/g, '');
+        if (value.length > 3) value = value.slice(0, 3);
+        event.target.value = value.padStart(3, '0');
+        updateFormState();
+    });
+
     // Impede a inserção manual de números no input do tipo number
     cvcInput.addEventListener('keydown', (event) => {
         const allowedKeys = ["ArrowUp", "ArrowDown", "Backspace", "Delete", "Tab", "Shift", "Home", "End"];
@@ -36,7 +44,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
             return;
         }
         event.preventDefault();
-        updateFormState();
     });
 
     // Impede a inserção de números e caracteres especiais no input do tipo text
