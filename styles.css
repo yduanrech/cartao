@@ -64,7 +64,7 @@ body {
     align-items: center;
 }
 
-.cuidado .cpf {
+.cuidado {
     display: flex;
     flex-direction: column;
     justify-content: center; /* Alinha horizontalmente ao centro */
