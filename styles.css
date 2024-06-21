@@ -6,7 +6,9 @@ head {
     font-size: 14px;
   }
 
-
+body {
+    padding-bottom: 1rem;
+}
 
 .titulo {
     text-align: center;
@@ -26,7 +28,7 @@ head {
     align-items: center;
     margin: auto;
     padding: auto;
-    width: 70%;
+    width: 50%;
 }
 
 .nome {
@@ -47,6 +49,12 @@ head {
 .aviso {
     font-style: italic;
     font-size: 0.7rem;
+    padding: 0.4rem;
+}
+
+.aviso2 {
+    font-style: italic;
+    font-size: 0.7rem;
 }
 
 .letras {
@@ -55,3 +63,31 @@ head {
     justify-content: center; /* Alinha horizontalmente ao centro */
     align-items: center;
 }
+
+.cuidado .cpf {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Alinha horizontalmente ao centro */
+    align-items: center;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+.form-control {
+    width: auto;
+}
+
+.cpf {
+    display: flex;
+    flex-direction: row;
+    justify-content: center; /* Alinha horizontalmente ao centro */
+    align-items: center;
+}
+
+#gerar-btn {
+    margin-left: 0.5rem;
+}
+

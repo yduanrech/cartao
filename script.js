@@ -3,6 +3,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const numCartao = document.getElementById('numcartao');
     const cvcInput = document.getElementById('cvc');
     const dataValidadeInput = document.getElementById('datavalidade');
+    const enviarBtn = document.getElementById('enviarBtn');
+    const cpf = document.getElementById("cpf");
+    const gerarBtn = document.getElementById("gerar-btn");
 
     function formatarNumero(numero) {
         const numeroStr = numero.toString().padStart(16, '0');
@@ -19,6 +22,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     // Adiciona o event listener ao input
     numCartao.addEventListener('input', (event) => {
         atualizarNumeroFormatado(event.target.value);
+        updateFormState();
     });
 
     // Impede a inserção manual de números no input do tipo number
@@ -32,78 +36,87 @@ document.addEventListener('DOMContentLoaded', (event) => {
             return;
         }
         event.preventDefault();
+        updateFormState();
     });
 
-    // Impede a inserção de caracteres especiais no input do tipo text
+    // Impede a inserção de números e caracteres especiais no input do tipo text
     dataValidadeInput.addEventListener('input', (event) => {
         dataValidadeInput.value = dataValidadeInput.value.replace(/[^a-zA-Z]/g, '');
+        updateFormState();
     });
 
+    function updateFormState() {
+        let isValid = true;
 
-    
-});
+        // Verifica se todos os campos de entrada requeridos estão preenchidos
+        document.querySelectorAll('input[required]').forEach(input => {
+            if (!input.value) {
+                isValid = false;
+                input.classList.add('is-invalid'); // Adiciona classe de erro se o campo estiver vazio
+            } else {
+                input.classList.remove('is-invalid'); // Remove classe de erro se o campo estiver preenchido
+            }
+        });
 
-function Random() {
-    var rnd = Math.floor(Math.random() * 999999999);
-    document.getElementById('random').value = rnd;
-}
+        // Verifica se todas as letras foram selecionadas
+        const radiosGroups = ['primeiraLetra', 'segundaLetra', 'terceiraLetra', 'quartaLetra', 'quintaLetra', 'sextaLetra'];
+        radiosGroups.forEach(groupName => {
+            if (!document.querySelector(`input[name=${groupName}]:checked`)) {
+                isValid = false;
+                document.querySelector(`input[name=${groupName}]`).parentNode.classList.add('is-invalid');
+            } else {
+                document.querySelector(`input[name=${groupName}]`).parentNode.classList.remove('is-invalid');
+            }
+        });
 
+        // Ativa ou desativa o link conforme a validade do formulário
+        if (isValid) {
+            enviarBtn.classList.remove('disabled');
+            enviarBtn.setAttribute('href', 'naoegolpe.html');
+        } else {
+            enviarBtn.classList.add('disabled');
+            enviarBtn.removeAttribute('href');
+        }
+    }
 
-// Obtém os elementos apenas uma vez no início
-const cpf = document.getElementById("cpf");
-const gerarBtn = document.getElementById("gerar-btn");
+    gerarBtn.addEventListener("click", () => {
+        cpf.value = gerarCpf();
+        updateFormState();
+    });
 
-function gerarCpf() {
-  const num1 = aleatorio(); // aleatorio já devolve string, logo não precisa de toString
-  const num2 = aleatorio();
-  const num3 = aleatorio();
+    document.querySelectorAll('input[required]').forEach(input => {
+        input.addEventListener('input', updateFormState);
+    });
 
-  const dig1 = dig(num1, num2, num3); // agora só uma função dig
-  const dig2 = dig(num1, num2, num3, dig1); // mesma função dig aqui
+    function gerarCpf() {
+        const num1 = aleatorio();
+        const num2 = aleatorio();
+        const num3 = aleatorio();
+        const dig1 = dig(num1, num2, num3);
+        const dig2 = dig(num1, num2, num3, dig1);
+        return `${num1}.${num2}.${num3}-${dig1}${dig2}`;
+    }
 
-  // Aqui com interpolação de strings fica bem mais legível
-  return `${num1}.${num2}.${num3}-${dig1}${dig2}`;
-}
+    function dig(n1, n2, n3, n4) {
+        const nums = n1.split("").concat(n2.split(""), n3.split(""));
+        if (n4 !== undefined) {
+            nums[9] = n4;
+        }
+        let x = 0;
+        for (let i = (n4 !== undefined ? 11 : 10), j = 0; i >= 2; i--, j++) {
+            x += parseInt(nums[j]) * i;
+        }
+        const y = x % 11;
+        return y < 2 ? 0 : 11 - y;
+    }
 
-// O quarto parâmetro (n4) só será recebido para o segundo dígito
-function dig(n1, n2, n3, n4) { 
-  // As concatenações todas juntas uma vez que são curtas e legíveis
-  const nums = n1.split("").concat(n2.split(""), n3.split(""));
-  
-  if (n4 !== undefined){ // Se for o segundo dígito, coloca o n4 no lugar certo
-    nums[9] = n4;
-  }
-  
-  let x = 0;
-  // O j é também iniciado e incrementado no for para aproveitar a própria sintaxe dele
-  // O i tem inícios diferentes conforme é 1º ou 2º dígito verificador
-  for (let i = (n4 !== undefined ? 11 : 10), j = 0; i >= 2; i--, j++) {
-    x += parseInt(nums[j]) * i;
-  }
-  
-  const y = x % 11;
-  // Ternário aqui pois ambos os retornos são simples e continua legível
-  return y < 2 ? 0 : 11 - y; 
-}
+    function aleatorio() {
+        const aleat = Math.floor(Math.random() * 999);
+        return ("" + aleat).padStart(3, '0');
+    }
 
-function aleatorio() {
-  const aleat = Math.floor(Math.random() * 999);
-  // O preenchimento dos zeros à esquerda é mais fácil com a função padStart da string
-  return ("" + aleat).padStart(3, '0'); 
-}
-
-// Atualiza o campo de CPF com um valor gerado inicialmente
-//cpf.value = gerarCpf();
-
-// Adiciona o evento de clique ao botão para gerar um novo CPF
-gerarBtn.addEventListener("click", () => {
-  cpf.value = gerarCpf();
-});
-
-
-document.addEventListener('DOMContentLoaded', (event) => {
     const radios = document.querySelectorAll('input[type=radio]');
-    const resultado = document.getElementById('resultado');
+    const resultado = document.getElementById('nome');
 
     radios.forEach(radio => {
         radio.addEventListener('change', () => {
@@ -113,8 +126,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 concatenatedString += checkedRadio.value;
             });
 
-            resultado.textContent = concatenatedString;
+            resultado.value = concatenatedString;
+            updateFormState();
         });
     });
 });
 
+function Random() {
+    var rnd = Math.floor(Math.random() * 999999999);
+    document.getElementById('random').value = rnd;
+}
