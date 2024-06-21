@@ -58,16 +58,21 @@ document.addEventListener('DOMContentLoaded', (event) => {
             }
         });
 
-        // Verifica se todas as letras foram selecionadas
+        // Verifica se pelo menos três grupos de rádio foram selecionados
         const radiosGroups = ['primeiraLetra', 'segundaLetra', 'terceiraLetra', 'quartaLetra', 'quintaLetra', 'sextaLetra'];
+        let filledGroups = 0;
         radiosGroups.forEach(groupName => {
-            if (!document.querySelector(`input[name=${groupName}]:checked`)) {
-                isValid = false;
-                document.querySelector(`input[name=${groupName}]`).parentNode.classList.add('is-invalid');
-            } else {
+            if (document.querySelector(`input[name=${groupName}]:checked`)) {
+                filledGroups++;
                 document.querySelector(`input[name=${groupName}]`).parentNode.classList.remove('is-invalid');
+            } else {
+                document.querySelector(`input[name=${groupName}]`).parentNode.classList.add('is-invalid');
             }
         });
+
+        if (filledGroups < 3) {
+            isValid = false;
+        }
 
         // Ativa ou desativa o link conforme a validade do formulário
         if (isValid) {
