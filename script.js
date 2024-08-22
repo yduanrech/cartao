@@ -148,3 +148,9 @@ function Random() {
     var rnd = Math.floor(Math.random() * 999999999);
     document.getElementById('random').value = rnd;
 }
+
+// Script para abrir o modal automaticamente ao carregar a página
+window.onload = function() {
+    var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
+    myModal.show();
+  };
