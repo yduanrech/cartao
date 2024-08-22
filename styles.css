@@ -91,3 +91,15 @@ a {
     margin-left: 0.5rem;
 }
 
+.feedback {
+    margin-top: 1rem;
+}
+
+.cards-feedback {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    justify-content: center;
+    margin: 1.5rem;
+}
+

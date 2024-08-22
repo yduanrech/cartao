@@ -11,28 +11,53 @@
 </head>
 
 <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <span class="navbar-brand">Real Madrid</span>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="index.html">Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="feedback.html">Feedbacks</a>
+                    </li>
+                </ul>
+                <span class="navbar-text"> <b>Confira nossos feedbacks!</b>
+                </span>
+            </div>
+        </div>
+    </nav>
+
     <div class="container">
 
         <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Aviso</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Aviso</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <h1><strong>ATENÇÃO</strong></h1>
+                        <h6>Através de feedbacks, nos informaram que NÃO estávamos sendo inclusivos. Por isso,
+                            realizamos algumas mudanças no site.</h6>
+                        <h6>Fomos acusados de paifobia por exigir somente o nome da mãe para o cadastro e não oferecer a
+                            opção de inserir o nome do pai. Por conta disso, alteramos "Nome da Mãe" para "Nome do(a)
+                            Genitor(a)".</h6>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-            <h1><strong>ATENÇÃO</strong></h1>
-            <h6>Através de feedbacks, nos informaram que NÃO estávamos sendo inclusivos. Por isso, realizamos algumas mudanças no site.</h6>
-            <h6>Fomos acusados de paifobia por exigir somente o nome da mãe para o cadastro e não oferecer a opção de inserir o nome do pai. Por conta disso, alteramos "Nome da Mãe" para "Nome do(a) Genitor(a)".</h6>            
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Fechar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  
+
         <img class="img-fluid rounded time" src="imagens/real_202216537755162893.jpg" alt="">
         <h1 class="titulo">Descubra qual jogador do Real Madrid você seria.</h1>
 
@@ -44,7 +69,8 @@
 
             <p></p>
             <label for="datavalidade">Data de validade</label>
-            <input class="form-control" type="text" placeholder="Escreva a data" name="datavalidade" id="datavalidade" required>
+            <input class="form-control" type="text" placeholder="Escreva a data" name="datavalidade" id="datavalidade"
+                required>
 
             <p></p>
             <label for="cvc">Código de segurança</label>
@@ -56,25 +82,25 @@
             <label for="cpf">CPF:</label>
             <div class="cpf">
                 <input class="form-control" type="text" id="cpf" readonly required>
-                <button class="btn btn-primary" id="gerar-btn">Inserir CPF</button>   
+                <button class="btn btn-primary" id="gerar-btn">Inserir CPF</button>
             </div>
-           
 
-            
-<!--
+
+
+            <!--
             <p></p>
             <form name="random">
                 <input type="text" id="random" name="random" />
                 <input type="button" value="random" onclick="Random();" />
             </form>
--->            
+-->
 
             <p></p>
-            
+
             <label for="nome">Nome do(a) genitor(a):</label>
             <span class="aviso2">Se tiver</span>
             <!-- Elemento para exibir a string concatenada -->
-            
+
             <input class="form-control" type="text" id="nome" readonly>
             <span class="aviso">Devido a limitações do nosso sistema, só aceitamos nomes com até 6 letras</span>
             <div class="nomecompleto">
