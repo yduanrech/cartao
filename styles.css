@@ -127,3 +127,7 @@ a {
     padding-left: 3.5rem;
     padding-right: 3.5rem;
 }
+
+.jogadorEscolhido {
+    max-width: 100%;
+}
