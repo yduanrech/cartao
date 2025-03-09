@@ -63,9 +63,39 @@ body {
 .letras {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: center;
-    /* Alinha horizontalmente ao centro */
     align-items: center;
+}
+
+@media (max-width: 768px) {
+    .letras p {
+        font-size: 0.9rem;
+        text-align: center;
+        margin-bottom: 0.5rem;
+    }
+    .letra {
+        padding: 0.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .letras {
+        flex-direction: column; /* O rótulo ficará acima dos botões */
+        align-items: center;
+    }
+    .nome {
+        flex-wrap: wrap; /* Permite que os botões quebrem a linha */
+    }
+    .letra label {
+        font-size: 0.8rem; /* Reduz o tamanho dos textos dos radios */
+    }
+}
+
+
+.nomecompleto {
+    display: flex;
+    flex-direction: column;
 }
 
 .cuidado {
