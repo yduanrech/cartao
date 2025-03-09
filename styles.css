@@ -134,6 +134,9 @@ a {
 .cards-feedback {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+
+    align-items: center;
     gap: 2rem;
     justify-content: center;
     margin: 1.5rem;
@@ -164,4 +167,16 @@ a {
 
 .numcartao {
     margin-bottom: 0;
+}
+
+.cvcNovo {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.botoesCvc {
+    margin-left: 0.4rem;
 }

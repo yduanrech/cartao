@@ -174,8 +174,18 @@
                 required>
 
             <p></p>
+           <!-- 
             <label for="cvc">Código de segurança</label>
             <input class="form-control" type="number" placeholder="CVC" name="cvc" id="cvc" required>
+           -->
+            <label for="cvc">Código de segurança</label>
+            <div class="cvcNovo">
+                <input class="form-control" type="number" placeholder="CVC" name="cvcNovo" id="cvcNovo" required value="000">
+
+                <button class="btn btn-primary botoesCvc" id="addCvc">+</button>
+                <button class="btn btn-primary botoesCvc" id="subCvc">-</button>
+            </div>
+            
 
 
 

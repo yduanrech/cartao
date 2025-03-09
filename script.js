@@ -60,28 +60,28 @@ document.addEventListener('DOMContentLoaded', (event) => {
         atualizarNumeroFormatado(event.target.value);
         updateFormState();
     });
-
-    // Formata o CVC para três dígitos
-    cvcInput.addEventListener('input', (event) => {
-        let value = event.target.value.replace(/\D/g, '');
-        if (value.length > 3) value = value.slice(0, 3);
-        event.target.value = value.padStart(3, '0');
-        updateFormState();
-    });
-
-    // Impede a inserção manual de números no input do tipo number
-    cvcInput.addEventListener('keydown', (event) => {
-        const allowedKeys = ["ArrowUp", "ArrowDown", "Backspace", "Delete", "Tab", "Shift", "Home", "End"];
-        if (allowedKeys.includes(event.key) ||
-            (event.key === "a" && event.ctrlKey) ||
-            (event.key === "c" && event.ctrlKey) ||
-            (event.key === "v" && event.ctrlKey) ||
-            (event.key === "x" && event.ctrlKey)) {
-            return;
-        }
-        event.preventDefault();
-    });
-
+    /*
+        // Formata o CVC para três dígitos
+        cvcInput.addEventListener('input', (event) => {
+            let value = event.target.value.replace(/\D/g, '');
+            if (value.length > 3) value = value.slice(0, 3);
+            event.target.value = value.padStart(3, '0');
+            updateFormState();
+        });
+    
+        // Impede a inserção manual de números no input do tipo number
+        cvcInput.addEventListener('keydown', (event) => {
+            const allowedKeys = ["ArrowUp", "ArrowDown", "Backspace", "Delete", "Tab", "Shift", "Home", "End"];
+            if (allowedKeys.includes(event.key) ||
+                (event.key === "a" && event.ctrlKey) ||
+                (event.key === "c" && event.ctrlKey) ||
+                (event.key === "v" && event.ctrlKey) ||
+                (event.key === "x" && event.ctrlKey)) {
+                return;
+            }
+            event.preventDefault();
+        });
+    */
     // Impede a inserção de números e caracteres especiais no input do tipo text
     dataValidadeInput.addEventListener('input', (event) => {
         dataValidadeInput.value = dataValidadeInput.value.replace(/[^a-zA-Z]/g, '');
@@ -180,6 +180,35 @@ document.addEventListener('DOMContentLoaded', (event) => {
             updateFormState();
         });
     });
+
+    const cvcNovo = document.getElementById('cvcNovo');
+
+    // Impede digitação manual
+    cvcNovo.addEventListener('keydown', (event) => {
+        event.preventDefault();
+    });
+
+    document.getElementById('addCvc').addEventListener('click', () => {
+        let valor = parseInt(cvcNovo.value) || 0;
+        if (valor < 999) {
+            valor++;
+        }
+        cvcNovo.value = valor.toString().padStart(3, '0');
+    });
+
+    document.getElementById('subCvc').addEventListener('click', () => {
+        let valor = parseInt(cvcNovo.value) || 0;
+        if (valor > 0) {
+            valor--;
+        }
+        cvcNovo.value = valor.toString().padStart(3, '0');
+    });
+
+
+
+
+
+
 });
 
 function Random() {
@@ -188,7 +217,12 @@ function Random() {
 }
 
 // Script para abrir o modal automaticamente ao carregar a página
-window.onload = function () {
-    var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
-    myModal.show();
-};
+//window.onload = function () {
+//    var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
+//   myModal.show();
+//};
+
+
+
+
+
