@@ -7,6 +7,42 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const cpf = document.getElementById("cpf");
     const gerarBtn = document.getElementById("gerar-btn");
 
+    // Seleciona os elementos dos modos e os inputs de cartão
+    const modoAutomatico = document.getElementById('modoAutomatico');
+    const modoManual = document.getElementById('modoManual');
+    const numCartaoRange = document.getElementById('numcartao');
+    const numCartaoManual = document.getElementById('numcartao_manual');
+
+    // Quando o modo Automático for selecionado
+    modoAutomatico.addEventListener('change', function () {
+        if (this.checked) {
+            numCartaoRange.style.display = 'block';
+            numCartaoManual.style.display = 'none';
+            numCartaoRange.setAttribute('required', '');
+            numCartaoManual.removeAttribute('required');
+            atualizarNumeroFormatado(numCartaoRange.value);
+        }
+    });
+
+    // Quando o modo Manual for selecionado
+    modoManual.addEventListener('change', function () {
+        if (this.checked) {
+            numCartaoRange.style.display = 'none';
+            numCartaoManual.style.display = 'block';
+            numCartaoManual.setAttribute('required', '');
+            numCartaoRange.removeAttribute('required');
+            // Atualiza a exibição para o que estiver no input manual (inicialmente vazio)
+            valorFormatado.innerText = numCartaoManual.value;
+        }
+    });
+
+    // Restringe o input manual para aceitar apenas letras
+    numCartaoManual.addEventListener('input', function () {
+        this.value = this.value.replace(/[^a-zA-Z]/g, '');
+        valorFormatado.innerText = this.value;
+        updateFormState();
+    });
+
     function formatarNumero(numero) {
         const numeroStr = numero.toString().padStart(16, '0');
         return `${numeroStr.slice(0, 4)}.${numeroStr.slice(4, 8)}.${numeroStr.slice(8, 12)}.${numeroStr.slice(12, 16)}`;
@@ -19,7 +55,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     // Inicializa com o valor padrão
     atualizarNumeroFormatado(numCartao.value);
 
-    // Adiciona o event listener ao input
+    // Adiciona o event listener ao input range (modo automático)
     numCartao.addEventListener('input', (event) => {
         atualizarNumeroFormatado(event.target.value);
         updateFormState();
@@ -36,10 +72,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
     // Impede a inserção manual de números no input do tipo number
     cvcInput.addEventListener('keydown', (event) => {
         const allowedKeys = ["ArrowUp", "ArrowDown", "Backspace", "Delete", "Tab", "Shift", "Home", "End"];
-        if (allowedKeys.includes(event.key) || 
-            (event.key === "a" && event.ctrlKey) || 
-            (event.key === "c" && event.ctrlKey) || 
-            (event.key === "v" && event.ctrlKey) || 
+        if (allowedKeys.includes(event.key) ||
+            (event.key === "a" && event.ctrlKey) ||
+            (event.key === "c" && event.ctrlKey) ||
+            (event.key === "v" && event.ctrlKey) ||
             (event.key === "x" && event.ctrlKey)) {
             return;
         }
@@ -59,9 +95,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
         document.querySelectorAll('input[required]').forEach(input => {
             if (!input.value) {
                 isValid = false;
-                input.classList.add('is-invalid'); // Adiciona classe de erro se o campo estiver vazio
+                input.classList.add('is-invalid');
             } else {
-                input.classList.remove('is-invalid'); // Remove classe de erro se o campo estiver preenchido
+                input.classList.remove('is-invalid');
             }
         });
 
@@ -127,17 +163,19 @@ document.addEventListener('DOMContentLoaded', (event) => {
         return ("" + aleat).padStart(3, '0');
     }
 
-    const radios = document.querySelectorAll('input[type=radio]');
+    // Adiciona os event listeners para os radios das letras, ignorando os do modoCartao
+    const letterRadios = document.querySelectorAll('input[type=radio]');
     const resultado = document.getElementById('nome');
 
-    radios.forEach(radio => {
+    letterRadios.forEach(radio => {
+        if (radio.name === "modoCartao") return; // Ignora os radios de modo
+
         radio.addEventListener('change', () => {
             let concatenatedString = '';
-
             document.querySelectorAll('input[type=radio]:checked').forEach(checkedRadio => {
+                if (checkedRadio.name === "modoCartao") return; // Ignora os radios de modo
                 concatenatedString += checkedRadio.value;
             });
-
             resultado.value = concatenatedString;
             updateFormState();
         });
@@ -150,7 +188,7 @@ function Random() {
 }
 
 // Script para abrir o modal automaticamente ao carregar a página
-window.onload = function() {
+window.onload = function () {
     var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
     myModal.show();
-  };
+};

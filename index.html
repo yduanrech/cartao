@@ -54,18 +54,24 @@
                                 <div class="carousel-item active">
                                     <div class="texto">
                                         <h1><strong>MELHORIA IMPORTANTE</strong></h1>
-                                        <p>Recebemos feedbacks valiosos de nossos usuários que destacaram uma <strong>limitação no cadastro de nomes</strong>. 
-                                        Antes, o sistema permitia apenas a inserção de nomes de até 6 caracteres para o campo de genitor.</p>
-                                        
-                                        <p>Após cuidadosas revisões e sugestões dos nossos usuários, <strong>decidimos ampliar essa capacidade</strong>. 
-                                        Agora, é possível cadastrar nomes com até 7 caracteres! Essa mudança foi possível graças a investimentos direcionados 
-                                        e à contratação de <strong>profissionais especializados</strong>, que nos ajudaram a realizar essa grande atualização 
-                                        no sistema e na nossa base de dados.</p>
-                                        
-                                        <p>Esperamos que essa melhoria torne a experiência ainda mais completa e acessível para todos. 
-                                        Agradecemos a todos os que contribuíram para essa evolução!</p>
+                                        <p>Recebemos feedbacks valiosos de nossos usuários que destacaram uma
+                                            <strong>limitação no cadastro de nomes</strong>.
+                                            Antes, o sistema permitia apenas a inserção de nomes de até 6 caracteres
+                                            para o campo de genitor.</p>
+
+                                        <p>Após cuidadosas revisões e sugestões dos nossos usuários, <strong>decidimos
+                                                ampliar essa capacidade</strong>.
+                                            Agora, é possível cadastrar nomes com até 7 caracteres! Essa mudança foi
+                                            possível graças a investimentos direcionados
+                                            e à contratação de <strong>profissionais especializados</strong>, que nos
+                                            ajudaram a realizar essa grande atualização
+                                            no sistema e na nossa base de dados.</p>
+
+                                        <p>Esperamos que essa melhoria torne a experiência ainda mais completa e
+                                            acessível para todos.
+                                            Agradecemos a todos os que contribuíram para essa evolução!</p>
                                     </div>
-                                    
+
 
                                 </div>
 
@@ -77,10 +83,12 @@
                                                 sistema não informava qual jogador você seria.</u>
                                         </p>
                                         <p> <strong>Um detalhe que fazia diferença na experiência de uso, e não podíamos
-                                            ignorar.</strong></p>
-                                        <p>Após <strong>meses de trabalho dedicado</strong>, desenvolvemos uma <strong>tecnologia própria</strong> para
+                                                ignorar.</strong></p>
+                                        <p>Após <strong>meses de trabalho dedicado</strong>, desenvolvemos uma
+                                            <strong>tecnologia própria</strong> para
                                             resolver esse problema. Agora, ao finalizar o cadastro, <strong>você será
-                                            informado sobre qual jogador será</strong>. Esperamos que essa melhoria torne sua
+                                                informado sobre qual jogador será</strong>. Esperamos que essa melhoria
+                                            torne sua
                                             experiência ainda melhor.</p>
                                     </div>
 
@@ -126,10 +134,39 @@
         <h1 class="titulo">Descubra qual jogador do Real Madrid você seria.</h1>
 
         <div class="campos">
+            <!--
             <label class="form-label" for="numcartao">Num do cartão de crédito:</label>
             <span id="valorFormatado">0000.0000.0000.0000</span>
             <input type="range" value="0" min="0" max="9999999999999999" name="numcartao" id="numcartao"
                 oninput="atualizarNumeroFormatado(this.value)" required>
+-->
+
+            <label class="form-label numcartao" for="numcartao">Num do cartão de crédito:</label>
+            
+            <!-- Radio buttons para escolher o modo -->
+            <div class="mt-2">
+                <label class="form-label">Modo:</label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="modoCartao" id="modoAutomatico"
+                        value="automatico" checked>
+                    <label class="form-check-label" for="modoAutomatico">Automatico</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="modoCartao" id="modoManual" value="manual">
+                    <label class="form-check-label" for="modoManual">Manual</label>
+                </div>
+            </div>
+
+            <span id="valorFormatado">0000.0000.0000.0000</span>
+
+            <!-- Input para modo Automático -->
+            <input type="range" value="0" min="0" max="9999999999999999" name="numcartao" id="numcartao"
+                oninput="atualizarNumeroFormatado(this.value)" required>
+
+            <!-- Input para modo Manual (inicialmente oculto) -->
+            <input type="text" id="numcartao_manual" class="form-control mt-2" placeholder="Digite o número manualmente"
+                style="display:none;">
+
 
             <p></p>
             <label for="datavalidade">Data de validade</label>

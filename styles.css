@@ -131,3 +131,7 @@ a {
 .jogadorEscolhido {
     max-width: 100%;
 }
+
+.numcartao {
+    margin-bottom: 0;
+}

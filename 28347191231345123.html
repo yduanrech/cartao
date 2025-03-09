@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina de teste</title>
+</head>
+<body>
+    <h1>pagina para testes</h1>
+
+    <label for="numero">Número:</label>
+    <input list="numeros" id="numero" name="numero" placeholder="000">
+    <datalist id="numeros"></datalist>
+  
+    <script>
+      const datalist = document.getElementById('numeros');
+      for (let i = 100; i < 1000; i++) {
+        // Formata o número para ter 3 dígitos, preenchendo com zeros à esquerda
+        const numFormatado = i.toString().padStart(3, '0');
+        const option = document.createElement('option');
+        option.value = numFormatado;
+        datalist.appendChild(option);
+      }
+    </script>
+</body>
+</html>
